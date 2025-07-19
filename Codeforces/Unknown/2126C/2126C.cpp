@@ -13,19 +13,19 @@ void solve(){
         }
     }
     sort(v.begin() ,v.end());
-
+    int mx =  *max_element(v.begin() , v.end());
+    if(init_h == mx){
+        cout << "yes\n";
+        return;
+    }
+    v.erase(unique(v.begin() , v.end()), v.end());
     int i = find(v.begin() , v.end() ,init_h) - v.begin();
-    int prev = v[i],water = 1;
-    while(i<n){
-        while(v[i] == prev){
-            i++;
-        }
-        if(v[i] - prev > prev - water + 1){
-            cout << "No\n";
+    for(; i+1<v.size(); i++){
+        
+        if(v[i+1] - v[i] > init_h){
+            cout << "NO\n";
             return;
         }
-        prev = v[i];
-        water++;
     }
     cout << "yes\n";
 }
